@@ -1,27 +1,19 @@
-crossunder <- function(data1, data2) {
-  
-  # Check that both vectors have the same length
-  if (length(data1) != length(data2)) {
-    stop("data1 and data2 must have the same length")
+crossunder <- function(arr1, arr2) {
+
+  if (length(arr1) != length(arr2)) {
+    stop("Both arrays should have the same length")
   }
-  
-  # Initialize crossunder results
-  result <- rep(FALSE, length(data1))
-  
-  # Check for crossunder
-  for (i in 2:length(data1)) {
-    if (data1[i - 1] >= data2[i - 1] &&
-        data1[i] < data2[i]) {
-      result[i] <- TRUE
+
+  crossunder_signals <- rep("False", length(arr1))
+  crossunder_signals[1] <- "None"
+
+  for (i in 2:length(arr1)) {
+    if (arr1[i] < arr2[i] && arr1[i - 1] >= arr2[i - 1]) {
+      crossunder_signals[i] <- "True"
+    } else {
+      crossunder_signals[i] <- "False"
     }
   }
-  
-  return(result)
+
+  return(crossunder_signals)
 }
-
-# Test Crossunder
-data1 <- c(5, 4, 3, 2, 1)
-data2 <- c(4, 4, 4, 3, 2)
-
-crossunder_result <- crossunder(data1, data2)
-print(crossunder_result)
